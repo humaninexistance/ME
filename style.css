@@ -1,0 +1,31 @@
+html, body{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin:0;
+    background: linear-gradient(#363441, #41447A);
+    background-attachment: fixed;
+    color: white;
+    font-family: 'system-ui', sans-serif;
+    scroll-behavior: smooth;
+}
+
+nav{
+    background-color: #3B3642;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    padding-left: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 1000;
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+}
