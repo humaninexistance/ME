@@ -80,3 +80,13 @@ footer p{
     padding-left: 15px;
     padding-right: 15px;
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.dark a{
+    text-decoration: none;
+    color: white;
+}
