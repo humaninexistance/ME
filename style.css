@@ -1,13 +1,15 @@
-html, body{
+body{
     display: flex;
     flex-direction: column;
-    padding: 0;
-    margin:0;
+    padding: 0px;
+    margin: 0px;
     background: linear-gradient(#F7E0AB 0%, #E08075 90%, #DC727B 100%);
     background-attachment: fixed;
     color: black;
     font-family: 'system-ui', sans-serif;
     scroll-behavior: smooth;
+    min-height: 100vh;
+    background-repeat: no-repeat;
 }
 
 nav{
@@ -40,7 +42,41 @@ nav a{
     color: white;
 }
 
-button{
-    align-self: flex-start;
-    display: inline-block;
+.links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px;
+    font-weight: normal;
+}
+
+.links a, .links button {
+    margin-left: 20px;
+    font-size:0.9em;
+}
+
+.nav-icon{
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+}
+
+.page{
+    margin: 20px;
+    padding: 10px;
+    flex: 1;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -4px 2px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    background-color: #FDD9AE;
+    bottom: 0;
+}
+
+footer p{
+    padding-left: 15px;
+    padding-right: 15px;
 }
