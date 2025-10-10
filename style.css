@@ -90,3 +90,7 @@ a{
     text-decoration: none;
     color: white;
 }
+
+#row1 img, #row2 img, #row3 img, #row4 img, #row5 img{
+    height: 100px;
+}

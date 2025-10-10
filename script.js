@@ -10,3 +10,9 @@ function darkmode(){
     button.innerText = "An mode!";
   }
 }
+
+starRow.style.setProperty("--star-gap", `${randomStarGap}px`);
+starRow.style.setProperty("--row-gap", `${randomRowGap}px`);
+const starRow = document.querySelector("starrows");
+const randomStarGap = Math.random() * 140 + 5;
+const randomRowGap = Math.random() * 50 + 10;
