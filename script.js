@@ -11,8 +11,19 @@ function darkmode(){
   }
 }
 
-starRow.style.setProperty("--star-gap", `${randomStarGap}px`);
-starRow.style.setProperty("--row-gap", `${randomRowGap}px`);
-const starRow = document.querySelector("starrows");
-const randomStarGap = Math.random() * 140 + 5;
-const randomRowGap = Math.random() * 50 + 10;
+const rows = document.querySelectorAll(".starrows"); // use a . for class!
+
+rows.forEach(row => {
+  const randomStarGap = Math.random() * 100 + 50;
+  const randomRowGap = Math.random() * 100 + 50;
+
+  row.style.setProperty("--star-gap", `${randomStarGap}px`);
+  row.style.setProperty("--row-gap", `${randomRowGap}px`);
+});
+
+function changeImageHover1(){
+  document.getElementById("star1").src="odo.png";
+}
+function changeImageLeave1(){
+  document.getElementById("star1").src="star.png";
+}
