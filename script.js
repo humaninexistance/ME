@@ -1,13 +1,13 @@
-function darkmode(){
+function lightmode(){
     const body = document.body;
-    const button = document.getElementById("darkmodebutton");
+    const button = document.getElementById("lightmodebutton");
 
-    body.classList.toggle("dark");
+    body.classList.toggle("light");
 
-    if (body.classList.contains("dark")) {
-    button.innerText = "Tsukasa mode!";
-  } else {
+    if (body.classList.contains("light")) {
     button.innerText = "An mode!";
+  } else {
+    button.innerText = "Tsukasa mode!";
   }
 }
 

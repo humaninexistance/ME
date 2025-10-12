@@ -3,9 +3,9 @@ body{
     flex-direction: column;
     padding: 0px;
     margin: 0px;
-    background: linear-gradient(#F7E0AB 0%, #E08075 90%, #DC727B 100%);
+    background: linear-gradient(#363441, #41447A);
     background-attachment: fixed;
-    color: black;
+    color: white;
     font-family: 'system-ui', sans-serif;
     scroll-behavior: smooth;
     min-height: 100vh;
@@ -13,7 +13,7 @@ body{
 }
 
 nav{
-    background-color: #FDD9AE;
+    background-color: #3B3642;
     position: sticky;
     top: 0;
     box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
@@ -29,17 +29,17 @@ nav{
 
 nav a{
     text-decoration: none;
+    color: white;
+}
+
+.light {
+    background: linear-gradient(#F7E0AB 0%, #E08075 90%, #DC727B 100%);
     color: black;
 }
 
-.dark {
-    background: linear-gradient(#363441, #41447A);
-    color: white;
-}
-
-.dark nav, .dark footer, .dark nav a{
-    background-color: #3B3642;
-    color: white;
+.light nav, .light footer, .light nav a{
+    background-color: #FDD9AE;
+    color: black;
 }
 
 .links{
@@ -72,7 +72,8 @@ footer {
     align-items: center;
     box-shadow: 0 -4px 2px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
-    background-color: #FDD9AE;
+    /*background-color: #FDD9AE;*/
+    background-color: #3B3642;
     bottom: 0;
 }
 
@@ -81,12 +82,12 @@ footer p{
     padding-right: 15px;
 }
 
-a{
+.light a{
     text-decoration: none;
     color: black;
 }
 
-.dark a{
+a{
     text-decoration: none;
     color: white;
 }
@@ -96,15 +97,15 @@ a{
 }
 
 .posts div{
-    background-color: #a695e9;
+    background-color: #7468a3;
     color: white;
     display: flex;
     justify-content: space-between;
     margin: 20px;
 }
 
-.dark .posts div{
-    background-color: #7468a3;
+.light .posts div{
+    background-color: #a695e9;
 }
 
 .posts div p{
