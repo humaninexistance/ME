@@ -94,3 +94,20 @@ a{
 #row1 img, #row2 img, #row3 img, #row4 img, #row5 img{
     height: 75px;
 }
+
+.posts div{
+    background-color: #a695e9;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.dark .posts div{
+    background-color: #7468a3;
+}
+
+.posts div p{
+    padding-left: 15px;
+    padding-right: 15px;
+}
