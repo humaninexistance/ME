@@ -75,3 +75,17 @@ var x = setInterval(function() {
     minutes + " minutes and " + seconds + " seconds ";
 
 }, 1000);
+
+var x = setInterval( function() {
+  const now = new Date();
+
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+  
+  const time = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  
+  const localDateTime = `${day}/${month}/${year} ${time}`;
+  
+  document.getElementById("time").innerHTML = localDateTime;
+}, 1000);
