@@ -21,7 +21,7 @@ rows.forEach(row => {
   row.style.setProperty("--row-gap", `${randomRowGap}px`);
 });
 
-var countDownDate = new Date("Mar 24, 2026 13:54:00");
+var countDownDate = new Date("Mar 24, 2027 13:54:00");
 
 var x = setInterval(function() {
   var now = new Date();
