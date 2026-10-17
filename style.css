@@ -158,3 +158,12 @@ a{
 .tab-content[hidden] {
   display: none;
 }
+
+
+.tab {
+  color: inherit;
+}
+
+.light .tab {
+  color: inherit;
+}
