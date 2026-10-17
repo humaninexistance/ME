@@ -122,3 +122,39 @@ a{
   justify-content: space-between;
   width: 100%;
 }
+
+
+.year {
+  margin-bottom: 2.5rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.75rem 0;
+  margin-bottom: -1px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom-color: currentColor;
+  font-weight: bold;
+}
+
+.tab:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.tab-content[hidden] {
+  display: none;
+}
