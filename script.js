@@ -89,3 +89,26 @@ var x = setInterval( function() {
   
   document.getElementById("time").innerHTML = localDateTime;
 }, 1000);
+
+
+document.querySelectorAll(".year").forEach(section => {
+  const tabs = section.querySelectorAll(".tab");
+  const panels = section.querySelectorAll(".tab-content");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const selected = tab.dataset.tab;
+
+      tabs.forEach(button => {
+        const isActive = button === tab;
+
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-selected", String(isActive));
+      });
+
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.content !== selected;
+      });
+    });
+  });
+});
