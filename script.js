@@ -144,7 +144,7 @@ confettiBtn.addEventListener("click", (event) => {
         document.body.appendChild(particle);
 
         const angle = Math.random() * Math.PI * 2;
-        const distance = 15 + Math.random() * 65;
+        const distance = 15 + Math.random() * 100;
         const rotation = Math.random() * 360;
 
         anime({
