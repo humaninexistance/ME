@@ -167,3 +167,19 @@ a{
 .light .tab {
   color: inherit;
 }
+
+.confetti-particle {
+    position: fixed;
+    width: 3px !important;
+    height: 5px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 3px !important;
+    max-height: 5px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    box-sizing: border-box !important;
+    pointer-events: none;
+    z-index: 9999;
+}

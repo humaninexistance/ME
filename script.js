@@ -112,3 +112,50 @@ document.querySelectorAll(".year").forEach(section => {
     });
   });
 });
+
+const confettiColors = [
+    "#ff0000",
+    "#ffff00",
+    "#00ff00",
+    "#00ffff",
+    "#0000ff",
+    "#ff00ff"
+];
+
+const confettiBtn = document.getElementById("enaok");
+
+
+confettiBtn.addEventListener("click", (event) => {
+    const rect = confettiBtn.getBoundingClientRect();
+
+    const originX = event.clientX || rect.left + rect.width / 2;
+    const originY = event.clientY || rect.top + rect.height / 2;
+
+    for (let i = 0; i < 45; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("confetti-particle");
+
+        particle.style.backgroundColor =
+            confettiColors[Math.floor(Math.random() * confettiColors.length)];
+
+        particle.style.left = `${originX}px`;
+        particle.style.top = `${originY}px`;
+
+        document.body.appendChild(particle);
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 15 + Math.random() * 65;
+        const rotation = Math.random() * 360;
+
+        anime({
+            targets: particle,
+            translateX: Math.cos(angle) * distance,
+            translateY: Math.sin(angle) * distance,
+            rotate: rotation,
+            opacity: [1, 0],
+            duration: 450 + Math.random() * 450,
+            easing: "easeOutQuad",
+            complete: () => particle.remove()
+        });
+    }
+});
