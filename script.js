@@ -114,12 +114,12 @@ document.querySelectorAll(".year").forEach(section => {
 });
 
 const confettiColors = [
-    "#ff0000",
-    "#ffff00",
-    "#00ff00",
-    "#00ffff",
-    "#0000ff",
-    "#ff00ff"
+    "#884499",
+    "#bb6688",
+    "#8888cc",
+    "#ccaa88",
+    "#ddaacc",
+    "#ff7722"
 ];
 
 const confettiBtn = document.getElementById("enaok");
