@@ -160,131 +160,127 @@ confettiBtn.addEventListener("click", (event) => {
     }
 });
 
+
+const canvas = document.querySelector(".canvas canvas");
+const ctx = canvas.getContext("2d");
+
+const container = document.querySelector(".canvas");
+
+const params = {
+    spring: 0.7,
+    pointsNumber: 30,
+    friction: 0.3,
+    baseWidth: 0.5
+};
+
+const pointer = {
+    x: 81,
+    y: 50
+};
+
+const trail = Array.from(
+    { length: params.pointsNumber },
+    () => ({
+        x: pointer.x,
+        y: pointer.y
+    })
+);
+
+// Keep the drawing surface matched to the small container.
+function setupCanvas() {
+    const rect = container.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+
+    canvas.style.width = `${rect.width}px`;
+    canvas.style.height = `${rect.height}px`;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
 setupCanvas();
 window.addEventListener("resize", setupCanvas);
 
-function setupCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+// Convert pointer coordinates into coordinates inside the canvas.
+function updateMousePosition(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+
+    pointer.x = clientX - rect.left;
+    pointer.y = clientY - rect.top;
+
+    // Keep the pointer within the canvas bounds.
+    pointer.x = Math.max(0, Math.min(rect.width, pointer.x));
+    pointer.y = Math.max(0, Math.min(rect.height, pointer.y));
 }
 
-const pointer = {
-  x: .5 * window.innerWidth,
-  y: .5 * window.innerHeight,
-}
-
-window.addEventListener("click", e => {
-  updateMousePosition(e.pageX, e.pageY);
-});
-window.addEventListener("mousemove", e => {
-  updateMousePosition(e.pageX, e.pageY);
-});
-window.addEventListener("touchmove", e => {
-  updateMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+canvas.addEventListener("mousemove", e => {
+    updateMousePosition(e.clientX, e.clientY);
 });
 
-function updateMousePosition(eX, eY) {
-  poiner.x = eX;
-  poiner.y = eY;
-}
+canvas.addEventListener("click", e => {
+    updateMousePosition(e.clientX, e.clientY);
+});
 
-const p = {x:0, y:0};
+canvas.addEventListener("touchmove", e => {
+    const touch = e.touches[0];
+    if (touch) {
+        updateMousePosition(touch.clientX, touch.clientY);
+    }
+}, { passive: true });
 
-update(0);
+// Draw the trail.
+function update() {
+    const rect = canvas.getBoundingClientRect();
 
-function update(t) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  p.x = pointer.x
-  p.y = pointer.y
-  ctx.beginPath();
-  ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
-  ctx.fill();
-  window.requestAnimationFrame(update);
-}
-const params = {
-  spring: .7,
-  pointsNumber: 30,
-  friction: .3,
-  baseWidth: .5
-};
+    ctx.clearRect(0, 0, rect.width, rect.height);
 
-p.x += (pointer.x - p.x) * params.spring;
-p.y += (pointer.y - p.y) * params.spring;
+    trail.forEach((point, index) => {
+        const previous = index === 0
+            ? pointer
+            : trail[index - 1];
 
-ctx.beginPath();
-ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
-ctx.fill();
+        const spring = index === 0
+            ? params.spring * 0.5
+            : params.spring;
 
-const trail = new Array(params.pointsNumber);
-for (let i = 0; i < params.pointsNumber; i++) {
-  trail[i] = {
-    x: poiner.x,
-    y: poiner.y,
-    dx: 0,
-    dy: 0,
-  }
-}
-
-function update (t) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  trail.forEach((p, pIdx) => {
-    const prev = pIdx === 0 ? pointer : trail[pIdx - 1];
-    const spring = pIdx === 0 ? .7 * params.spring : params.spring;
-
-    p.dx = (prev.x - p.x) * spring;
-    p.dy = (prev.y - p.y) * spring;
-
-    p.x += p.dx;
-    p.y += p.dy;
+        point.x += (previous.x - point.x) * spring;
+        point.y += (previous.y - point.y) * spring;
+    });
 
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
-    ctx.fill();
-  });
 
-  window.requestAnimationFrame(update);
+    trail.forEach((point, index) => {
+        if (index === 0) {
+            ctx.moveTo(point.x, point.y);
+        } else {
+            const previous = trail[index - 1];
+
+            const midX = (previous.x + point.x) / 2;
+            const midY = (previous.y + point.y) / 2;
+
+            ctx.quadraticCurveTo(
+                previous.x,
+                previous.y,
+                midX,
+                midY
+            );
+        }
+    });
+
+    if (trail.length > 0) {
+        const last = trail[trail.length - 1];
+        ctx.lineTo(last.x, last.y);
+    }
+
+    ctx.strokeStyle = "#f17";
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.stroke();
+
+    window.requestAnimationFrame(update);
 }
 
-trail.forEach((p,pIdx) => {
-  const prev = pIdx === 0 ? pointer : trail[pIdx - 1];
-
-  p.dx = (prev.x - p.x) * params.spring;
-  p.dy = (prev.y - p.y) * params.spring;
-
-  p.x += p.dy;
-  p.y += p.dy;
-
-  if (pIdx === 0) {
-    ctx.beginPath();
-    ctx.moveTo(p.x, p.y);
-  } else {
-    ctx.lineTo(p.x, p.y);
-  }
-});
-
-ctx.stroke();
-
-p.dx += (prev.x - p.x) * spring;
-p.dy += (prev.y - p.y) * spring;
-p.dx += params.friction;
-p.dy += params.friction;
-
-p.x += p.dx;
-p.y += p.dy;
-
-trail.forEach((p, pIdx) => {
-  if (pIdx === 0) {
-    ctx.beginPath();
-    ctx.moveTo(p.x, p.y);
-  }
-});
-
-for (let i=1; i < trail.length - 1; i++) {
-  const xc = .5 * (trail[i].x + trail[i+1].x);
-  const yc = .5 * (trail[i].y + trail [i+1].y);
-  ctx.quadraticCurveTo(trail[i].x, trail[i].y, xc, yc);
-  ctx.lineWidth = params.baseWidth + (params.pointsNumber - i);
-}
-
-ctx.stroke();
+update();

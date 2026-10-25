@@ -183,3 +183,16 @@ a{
     pointer-events: none;
     z-index: 9999;
 }
+
+.canvas {
+    width: 162px;
+    height: 100px;
+    background: white;
+    align-self: center;
+}
+
+.canvas canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
