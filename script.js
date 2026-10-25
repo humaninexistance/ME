@@ -159,3 +159,132 @@ confettiBtn.addEventListener("click", (event) => {
         });
     }
 });
+
+setupCanvas();
+window.addEventListener("resize", setupCanvas);
+
+function setupCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+const pointer = {
+  x: .5 * window.innerWidth,
+  y: .5 * window.innerHeight,
+}
+
+window.addEventListener("click", e => {
+  updateMousePosition(e.pageX, e.pageY);
+});
+window.addEventListener("mousemove", e => {
+  updateMousePosition(e.pageX, e.pageY);
+});
+window.addEventListener("touchmove", e => {
+  updateMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+});
+
+function updateMousePosition(eX, eY) {
+  poiner.x = eX;
+  poiner.y = eY;
+}
+
+const p = {x:0, y:0};
+
+update(0);
+
+function update(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  p.x = pointer.x
+  p.y = pointer.y
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
+  ctx.fill();
+  window.requestAnimationFrame(update);
+}
+const params = {
+  spring: .7,
+  pointsNumber: 30,
+  friction: .3,
+  baseWidth: .5
+};
+
+p.x += (pointer.x - p.x) * params.spring;
+p.y += (pointer.y - p.y) * params.spring;
+
+ctx.beginPath();
+ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
+ctx.fill();
+
+const trail = new Array(params.pointsNumber);
+for (let i = 0; i < params.pointsNumber; i++) {
+  trail[i] = {
+    x: poiner.x,
+    y: poiner.y,
+    dx: 0,
+    dy: 0,
+  }
+}
+
+function update (t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  trail.forEach((p, pIdx) => {
+    const prev = pIdx === 0 ? pointer : trail[pIdx - 1];
+    const spring = pIdx === 0 ? .7 * params.spring : params.spring;
+
+    p.dx = (prev.x - p.x) * spring;
+    p.dy = (prev.y - p.y) * spring;
+
+    p.x += p.dx;
+    p.y += p.dy;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+
+  window.requestAnimationFrame(update);
+}
+
+trail.forEach((p,pIdx) => {
+  const prev = pIdx === 0 ? pointer : trail[pIdx - 1];
+
+  p.dx = (prev.x - p.x) * params.spring;
+  p.dy = (prev.y - p.y) * params.spring;
+
+  p.x += p.dy;
+  p.y += p.dy;
+
+  if (pIdx === 0) {
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  } else {
+    ctx.lineTo(p.x, p.y);
+  }
+});
+
+ctx.stroke();
+
+p.dx += (prev.x - p.x) * spring;
+p.dy += (prev.y - p.y) * spring;
+p.dx += params.friction;
+p.dy += params.friction;
+
+p.x += p.dx;
+p.y += p.dy;
+
+trail.forEach((p, pIdx) => {
+  if (pIdx === 0) {
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  }
+});
+
+for (let i=1; i < trail.length - 1; i++) {
+  const xc = .5 * (trail[i].x + trail[i+1].x);
+  const yc = .5 * (trail[i].y + trail [i+1].y);
+  ctx.quadraticCurveTo(trail[i].x, trail[i].y, xc, yc);
+  ctx.lineWidth = params.baseWidth + (params.pointsNumber - i);
+}
+
+ctx.stroke();
