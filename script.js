@@ -285,21 +285,19 @@ function update() {
 
 update();
 
-
-
-
 function reaction(imageId, counterId) {
-    console.log("1. Function started!");
-
     const counter = document.getElementById(counterId);
-    console.log("2. Counter found:", counter);
-
     const currentCount = Number(counter.textContent) || 0;
-    console.log("3. Current count:", currentCount);
+    const newCount = currentCount + 1;
 
-    counter.textContent = currentCount + 1;
-    console.log("4. Updated count:", counter.textContent);
+    counter.textContent = newCount;
+
+    // Every 20 clicks, advance to the next phase.
+    const phase = Math.min(5, Math.floor((newCount - 1) / 20) + 1);
+
+    // Switch to the corresponding character image.
+    const image = document.getElementById(imageId);
+    const character = imageId.replace("image", "");
+
+    image.src = `assets/icons+chibis/clicker-game/${character}/${character}${phase}.jpg`;
 }
-
-
-
