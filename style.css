@@ -237,3 +237,19 @@ a{
     align-items: center;
     gap: 5px;
 }
+
+.character-button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.character-button img {
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
