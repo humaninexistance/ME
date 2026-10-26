@@ -170,8 +170,8 @@ a{
 
 .confetti-particle {
     position: fixed;
-    width: 6px !important;
-    height: 10px !important;
+    width: 5px !important;
+    height: 8px !important;
     min-width: 0 !important;
     min-height: 0 !important;
     max-width: 12px !important;
