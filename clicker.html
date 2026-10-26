@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>sanika's website !!</title>
+        <link rel="icon" href="assets/icons+chibis/favicon.ico">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <nav id="nav">
+            <a href="index.html" style="display: flex; flex-direction: row; align-items: center; font-size: 1.1em;">
+                <img class="nav-icon" src="assets/icons+chibis/icon2.png" alt="Tenma Tsukasa chibi icon">
+                <p>My Website!</p>
+            </a>
+            <div class="links" id="links">
+                <a href="stars.html">the week</a>
+                <a href="stuff.html">Stuff</a>
+                <a href="clicker.html">clicker game?!</a>
+                <a href="blog.html">sanika's amazing blog which you should totally check out</a>
+                <button id="lightmodebutton" onclick="lightmode()">Tsukasa mode!</button>
+            </div>
+        </nav>
+        <div class="page">
+            <h1>hello !!</h1>
+            <h2>i was bored and have no idea what else to put on this website, so i present to you..</h2>
+            <br>
+            <br>
+            <br>
+            <h1>MY FIRST ATTEMPT AT A CLICKER GAME!! YAYY</h1>
+            <br>
+            <br>
+            <h3>basically, there's gonna be like 2 or 3 icons and the more you click it, the more annoyed or excited they get! <br> im lwk lazy so uh... there'll be 5 phases, each icnreasing by 10 or 20! (i'll decide later) <br> i hope yall have fun lmao</h3>
+            <br>
+            <br>
+            <br>
+            <span class="game">
+                <div class="akito">
+                    <img id="akitoimage" src="assets/icons+chibis/clicker-game/akito/akito1.jpg" height="100px" width="100px" onclick="reaction('akitoimage', 'annoyedcount')">
+                    <p class="clickercounter">clicks so far: <span id="annoyedcount"></span></p>
+                </div>
+                <div class="emu">
+                    <img id="emuimage" src="assets/icons+chibis/clicker-game/" height="100px" width="100px" onclick="reaction('emuimage','excitedcount')">
+                    <p class="clickercounter">clicks so far:</p> <p class="clickercounter" id="excitedcount"></p>
+                </div>
+            </span>
+        </div>
+        <footer>
+            <p>source code on <a href="https://github.com/humaninexistance/ME" target="_blank">github</a></p>
+            <p>made with 🫶 by sanika !! (css by nicholas because he wants credit so bad)</p>
+            <p>no this isnt vibecoded how dare you</p>
+        </footer>
+    </body>
+</html>

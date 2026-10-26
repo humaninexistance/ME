@@ -284,3 +284,22 @@ function update() {
 }
 
 update();
+
+
+
+
+function reaction(imageId, counterId) {
+    console.log("1. Function started!");
+
+    const counter = document.getElementById(counterId);
+    console.log("2. Counter found:", counter);
+
+    const currentCount = Number(counter.textContent) || 0;
+    console.log("3. Current count:", currentCount);
+
+    counter.textContent = currentCount + 1;
+    console.log("4. Updated count:", counter.textContent);
+}
+
+
+
